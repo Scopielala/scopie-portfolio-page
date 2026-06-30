@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!--
+  index.html — Portfolio Website
+  Structure: Nav → Hero → About → Tech Stack → Apps → CV Samples
+             → Portfolio Samples → Contact → Footer
+
+  Key rules:
+  - Section IDs (e.g. id="about") → used by nav anchor links for scrolling
+  - Inner div IDs (e.g. id="about-content") → targeted by main.js for injection
+  - data.js MUST load before main.js (portfolioData must exist before it is read)
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- viewport meta tag makes the site responsive on mobile devices.
+       Without it, mobile browsers zoom out and render the page at desktop width.
+       Reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Viewport_meta_tag -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tab title + browser bookmarks label -->
+  <title>Scopie | CV Writer & Portfolio Page Builder</title>
+
+  <!-- Stylesheet loads in <head> so styles are ready before content renders.
+       If loaded at the bottom like scripts, users briefly see unstyled HTML. -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────────────────────────────────
+    <nav> is a semantic landmark — screen readers and search engines
+    recognize it as the primary navigation of the page.
+    Each href="#section-id" scrolls the page to that section on click.
+    Block: nav | Elements: nav__brand, nav__links, nav__link
+  -->
+  <nav class="nav">
+    <a href="#hero" class="nav__brand">Scopie</a>
+
+    <!-- nav__toggle is the hamburger button shown on mobile.
+         It has no content — CSS draws the icon using ::before / ::after.
+         aria-label gives screen readers context since there's no visible text. -->
+    <button class="nav__toggle" aria-label="Toggle navigation">
+      <span class="nav__hamburger"></span>
+    </button>
+
+    <ul class="nav__links">
+      <li><a href="#about"              class="nav__link">About</a></li>
+      <li><a href="#tech-stack"         class="nav__link">Stack</a></li>
+      <li><a href="#apps"               class="nav__link">Apps</a></li>
+      <li><a href="#cv-samples"         class="nav__link">CV Samples</a></li>
+      <li><a href="#portfolio-samples"  class="nav__link">Portfolio Pages</a></li>
+      <li><a href="#contact"            class="nav__link nav__link--cta">Work With Me</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────────────────
+    <header> is the semantic element for the introductory content of a page.
+    id="hero" → anchor target for nav__brand link.
+    id="hero-content" → where main.js → renderHero() injects h1 + subtext.
+    Block: hero | Elements injected by main.js: hero__tagline, hero__subtext
+  -->
+  <header class="hero" id="hero">
+    <div class="hero__content" id="hero-content">
+      <!-- Populated by main.js → renderHero() -->
+    </div>
+  </header>
+
+
+  <!-- ─── ABOUT ────────────────────────────────────────────────────────────────
+    <section> wraps a thematic grouping of content.
+    The section__title h2 is hardcoded here — section labels don't change
+    between clients, only the content inside section__inner__content does.
+    Block: section (shared utility block across all sections)
+    id="about" → nav anchor | id="about-content" → JS target
+  -->
+  <section class="section about" id="about">
+    <div class="section__inner">
+      <h2 class="section__title">About</h2>
+      <div class="section__body" id="about-content">
+        <!-- Populated by main.js → renderAbout() -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── TECH STACK & ROLES ───────────────────────────────────────────────────
+    Block: section (shared), tech-stack (specific)
+    id="tech-stack" → nav anchor | id="techstack-content" → JS target
+  -->
+  <section class="section tech-stack" id="tech-stack">
+    <div class="section__inner">
+      <h2 class="section__title">Tech Stack & Roles</h2>
+      <div class="section__body" id="techstack-content">
+        <!-- Populated by main.js → renderTechStack() -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── APPS I'VE BUILT ──────────────────────────────────────────────────────
+    Block: section (shared), apps (specific)
+    id="apps" → nav anchor | id="apps-content" → JS target
+  -->
+  <section class="section apps" id="apps">
+    <div class="section__inner">
+      <h2 class="section__title">Apps I've Built</h2>
+      <div class="section__body" id="apps-content">
+        <!-- Populated by main.js → renderApps() -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── CV WORK SAMPLES ──────────────────────────────────────────────────────
+    Block: section (shared), cv-samples (specific)
+    id="cv-samples" → nav anchor | id="cv-samples-content" → JS target
+    When cvSamples array is empty, main.js renders a "coming soon" stub here.
+  -->
+  <section class="section cv-samples" id="cv-samples">
+    <div class="section__inner">
+      <h2 class="section__title">CV Work Samples</h2>
+      <div class="section__body" id="cv-samples-content">
+        <!-- Populated by main.js → renderCvSamples() -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── PORTFOLIO PAGE SAMPLES ───────────────────────────────────────────────
+    Block: section (shared), portfolio-samples (specific)
+    id="portfolio-samples" → nav anchor | id="portfolio-samples-content" → JS target
+    When portfolioSamples array is empty, main.js renders a "coming soon" stub here.
+  -->
+  <section class="section portfolio-samples" id="portfolio-samples">
+    <div class="section__inner">
+      <h2 class="section__title">Portfolio Pages</h2>
+      <div class="section__body" id="portfolio-samples-content">
+        <!-- Populated by main.js → renderPortfolioSamples() -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── CONTACT ──────────────────────────────────────────────────────────────
+    Block: section (shared), contact (specific)
+    id="contact" → nav anchor | id="contact-content" → JS target
+  -->
+  <section class="section contact" id="contact">
+    <div class="section__inner">
+      <h2 class="section__title">Work With Me</h2>
+      <div class="section__body" id="contact-content">
+        <!-- Populated by main.js → renderContact() -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── FOOTER ───────────────────────────────────────────────────────────────
+    Static — no JS injection needed here.
+    Block: footer | Elements: footer__copy
+  -->
+  <footer class="footer">
+    <p class="footer__copy">© 2025 Scopie. Built with intention.</p>
+  </footer>
+
+
+  <!-- ─── SCRIPTS ──────────────────────────────────────────────────────────────
+    ORDER IS CRITICAL:
+    1. data.js first  → defines portfolioData in the global scope
+    2. main.js second → reads portfolioData (must already exist)
+
+    If main.js loads first, portfolioData is undefined and every render
+    function crashes immediately. The browser executes scripts in the
+    exact order they appear in the HTML.
+
+    Both are placed at the bottom of <body> so the full HTML structure
+    is parsed before the scripts run — an alternative to DOMContentLoaded.
+    We use both (scripts at bottom + DOMContentLoaded in main.js) as a
+    belt-and-suspenders approach.
+    Reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script
+  -->
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
