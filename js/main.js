@@ -23,8 +23,42 @@ document.addEventListener("DOMContentLoaded", function () {
   renderCvSamples();
   renderPortfolioSamples();
   renderContact();
+  initNavToggle();
 
 });
+
+
+// ─── MOBILE NAV TOGGLE ───────────────────────────────────────────────────────
+// Connects the hamburger button (nav__toggle) to the links menu (nav__links).
+// CSS already hides nav__links on mobile and shows it when the
+// nav__links--open modifier class is present (see style.css responsive section).
+// This function's only job is to add/remove that class on click.
+function initNavToggle() {
+  const toggleButton = document.querySelector(".nav__toggle");
+  const navLinks      = document.querySelector(".nav__links");
+
+  // Guard clause — if either element is missing, exit early instead of
+  // throwing an error when .addEventListener is called on null.
+  if (!toggleButton || !navLinks) return;
+
+  toggleButton.addEventListener("click", function () {
+    // classList.toggle() adds the class if it's absent, removes it if present.
+    // This is what lets a SINGLE click handler open AND close the menu —
+    // no need to track open/closed state manually in a variable.
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+    navLinks.classList.toggle("nav__links--open");
+  });
+
+  // Bonus UX fix: when a visitor taps a link inside the open mobile menu,
+  // close the menu automatically instead of leaving it open after navigating.
+  // We attach this listener to each individual link.
+  const allLinks = navLinks.querySelectorAll(".nav__link");
+  allLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.classList.remove("nav__links--open");
+    });
+  });
+}
 
 
 // ─── HERO ──────────────────────────────────────────────────────────────────────
